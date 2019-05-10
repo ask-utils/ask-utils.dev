@@ -6,7 +6,7 @@ description: >-
   This is our first posts about ask-utils.dev.We can get information about how
   to make your Alexa skill more easily.
 featuredpost: false
-featuredimage: /img/assets/youtube_profile_image.png 
+# featuredimage: /img/assets/youtube_profile_image.png 
 tags:
   - information
 ---

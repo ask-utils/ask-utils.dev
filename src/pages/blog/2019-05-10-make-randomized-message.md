@@ -5,7 +5,7 @@ date: 2019-05-10T00:48:25.518Z
 description: >-
   getRandomeMessage() provides you to get the randomized message. Let's make your skill more engaging.
 featuredpost: false
-featuredimage: /img/assets/youtube_profile_image.png 
+# featuredimage: /img/assets/youtube_profile_image.png 
 tags:
   - ask-utils
   - how-to
