@@ -12,7 +12,7 @@ class BlogRoll extends React.Component {
       <div className="columns is-multiline">
         {posts &&
           posts.map(({ node: post }) => (
-            <div className="is-parent column is-6" key={post.id}>
+            <div className="is-parent column is-12" key={post.id}>
               <article
                 className={`blog-list-item tile is-child box notification ${
                   post.frontmatter.featuredpost ? 'is-featured' : ''
@@ -37,8 +37,7 @@ class BlogRoll extends React.Component {
                       to={post.fields.slug}
                     >
                       {post.frontmatter.title}
-                    </Link>
-                    <span> &bull; </span>
+                    </Link><br />
                     <span className="subtitle is-size-5 is-block">
                       {post.frontmatter.date}
                     </span>
@@ -47,7 +46,8 @@ class BlogRoll extends React.Component {
                 <p>
                   {post.excerpt}
                   <br />
-                  <br />
+                </p>
+                <p style={{textAlign: 'right'}}>
                   <Link className="button" to={post.fields.slug}>
                     Keep Reading →
                   </Link>

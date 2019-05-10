@@ -38,11 +38,12 @@ const Footer = class extends React.Component {
                         Products
                       </Link>
                     </li>
-                    <li>
-                      <Link className="navbar-item" to="/contact/examples">
-                        Form Examples
-                      </Link>
-                    </li>
+                  </ul>
+                </section>
+              </div>
+              <div className="column is-4">
+                <section>
+                  <ul className="menu-list">
                     <li>
                       <a
                         className="navbar-item"
@@ -53,21 +54,15 @@ const Footer = class extends React.Component {
                         Admin
                       </a>
                     </li>
-                  </ul>
-                </section>
-              </div>
-              <div className="column is-4">
-                <section>
-                  <ul className="menu-list">
                     <li>
-                      <Link className="navbar-item" to="/blog">
-                        Latest Stories
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="navbar-item" to="/contact">
-                        Contact
-                      </Link>
+                      <a
+                        className="navbar-item"
+                        href="https://github.com/ask-utils/ask-utils.dev"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        GitHub
+                      </a>
                     </li>
                   </ul>
                 </section>

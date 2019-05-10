@@ -16,6 +16,7 @@ export const IndexPageTemplate = ({
   // intro,
 }) => (
   <div>
+    {/**
     <div
       className="full-width-image margin-top-0"
       style={{
@@ -64,11 +65,12 @@ export const IndexPageTemplate = ({
         </h3>
       </div>
     </div>
+     */}
     <section className="section section--gradient">
       <div className="container">
         <div className="section">
           <div className="columns">
-            <div className="column is-10 is-offset-1">
+            <div className="column is-12">
               <div className="content">
                 {mainpitch ? (
                   <div className="content">
@@ -90,16 +92,17 @@ export const IndexPageTemplate = ({
                   </div>
                 </div>
                {/**  <Features gridItems={intro.blurbs} />*/}
-                <div className="columns">
+                <div className="columns" style={{marginBottom: '50px'}}>
                   <div className="column is-12 has-text-centered">
                     <Link className="btn" to="/products">
                       See all products
                     </Link>
                   </div>
                 </div>
-                <div className="column is-12">
+                <hr style={{background: "#d5d5d5"}}/>
+                <div className="column is-12" style={{margin: '50px auto'}}>
                   <h3 className="has-text-weight-semibold is-size-2">
-                    Latest stories
+                    News &amp; Blogs
                   </h3>
                   <BlogRoll />
                   <div className="column is-12 has-text-centered">
