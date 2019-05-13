@@ -1,19 +1,111 @@
 ---
 templateKey: 'about-page'
 path: /about
-title: About our values
+title: About ASK Utils
 ---
-### Shade-grown coffee
-Coffee is a small tree or shrub that grows in the forest understory in its wild form, and traditionally was grown commercially under other trees that provided shade. The forest-like structure of shade coffee farms provides habitat for a great number of migratory and resident species.
+### Make Alexa skill more easily
+We want to make Alexa Skill more emotional and useful.  
+And we make various utility functions, handler, and some Builder or Factory class.
+We think these utilities should be more open, so we publish our utility function as ASK Utils.
 
-### Single origin
-Single-origin coffee is coffee grown within a single known geographic origin. Sometimes, this is a single farm or a specific collection of beans from a single country. The name of the coffee is then usually the place it was grown to whatever degree available.
 
-### Sustainable farming
-Sustainable agriculture is farming in sustainable ways based on an understanding of ecosystem services, the study of relationships between organisms and their environment. What grows where and how it is grown are a matter of choice and careful consideration for nature and communities.
+### Easy to use
+ASK Utils has a lots of helper functions.
 
-### Direct sourcing
-Direct trade is a form of sourcing practiced by some coffee roasters. Advocates of direct trade practices promote direct communication and price negotiation between buyer and farmer, along with systems that encourage and incentivize quality.
+#### Before ASK Utils
 
-### Reinvest profits
-We want to truly empower the communities that bring amazing coffee to you. That’s why we reinvest 20% of our profits into farms, local businesses and schools everywhere our coffee is grown. You can see the communities grow and learn more about coffee farming on our blog.
+```javascript
+function randomPhrase(myData) {
+  // the argument is an array [] of words or phrases
+  var i = 0;
+  i = Math.floor(Math.random() * myData.length);
+  return(myData[i]);
+}
+const confirmations = ['ok','got it','roger that', 'sounds good', 'great'];
+const message = "Here’s your random confirmation message, " + randomPhrase(confirmations))
+```
+
+#### After ASK Utils
+
+```typescript
+import { getRandomMessage } from 'ask-utils'
+const message = "Here’s your random confirmation message, " + getRandomMessage([
+    'ok',
+    'got it',
+    'roger that',
+    'sounds good',
+    'great'
+  ]
+)
+```
+
+### TypeScript support
+When we create some utility function, we have to make or take care of TypeScript.  
+ASK Utils packages are almost made by TypeScript.  
+So we don't have to make type definition, just import and use it.
+
+### Amazon Pay & Proactive Event support
+
+We provide packages for Amazon Pay and Proactive Events.
+We can easy to make the payload and call the proactive event API.
+
+#### Amazon Pay
+
+```javascript
+const AMAZONPay = require('@ask-utils/amazon-pay')
+// Make Order
+const SellerOrderAttributes = AMAZONPay.Setup.BillingAgreementBuilder
+  .setPlatFormId('My id')
+  .setSellerNote('my note')
+  .setSellerBillingAgreementId('agreement id')
+  .setSellerNote('My store')
+  .setCustomInformation('custom info')
+
+// Make Payload
+const setupPayload = AMAZONPay.Setup.PayloadBuilder
+  .setSellerId('my seller id')
+  .setCountryOfEstablishment('country')
+  .setLedgerCurrency('ledger currency')
+  .setCheckoutLanguage('checkout lang')
+  .withAmazonShippingAddress(true)
+  .isSandboxMode(true)
+  .setSandboxCustomerEmailId('email')
+  .updateBillingAgreement(SellerOrderAttributes)
+const payload = setupPayload.getPayload()
+
+```
+
+#### Proactive Event
+
+
+```typescript
+import { Client, MediaContent } from '@ask-utils/proactive-event'
+
+// setup client
+const clientSecret = 'XXXXXXXXXXXXXX'
+const client = new Client({
+  clientId: 'amzn1.application-oa2-client.XXXXXXXXX',
+  clientSecret: 'XXXXXXXXXXXXXX',
+  apiRegion: 'FE' // default: US
+})
+// configure event information
+const PayloadBuilder = MediaContent.Available.PayloadFactory.init()
+const parameters = PayloadBuilder
+  .setMediaType('ALBUM')
+  .setStartTime(moment('2019-03-11T10:05:58.561Z').toDate())
+  .setDistributionMethod('AIR')
+  .getParameter()
+// configure localizedAttributes
+const localizedAttributes = LocalizedAttributes.Factory.init()
+  .putLocalizedAttribute('en-US', 'contentName', 'New CD')
+  .putLocalizedAttribute('ja-JP', 'contentName', 'あたらしいCD')
+  .getLocalizedAttributes()
+
+// Call proactive event API
+client.setEvent(parameters)
+  .setRelevantAudience('Multicast')
+  .setLocalizedAttributes(localizedAttributes)
+  .requestEvent()
+  .then(result => console.log(result))
+  .catch(result => console.log(result))
+```
